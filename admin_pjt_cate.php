@@ -1,7 +1,6 @@
 <?php
 	require_once "header.inc.php";
 	require_once "dbconnect.php";
-	require_once "footer.inc.php";
 
 	//set up some SQL statements
 	$sql["language"] = 'SELECT * from languages';
@@ -12,7 +11,9 @@
 ?>
 
 <div id="wrapper">
-	<?php include "nav_part.inc.php" ?>
+	<?php
+     	include "nav_part.inc.php"; 
+     ?>
 
 	<divid="page-wrapper">
 		<h1>Project Category Information</h1>
@@ -34,3 +35,8 @@
 	<script src="javascripts/foundation.js"></script>
 	<script src="javascripts/app.js"></script>
 	<script src="javascripts/admin.js"></script>
+
+<?php
+     	$active = "Category";
+     	include "footer.inc.php"; 
+?>

@@ -11,7 +11,19 @@
     <script src="javascripts/tablesorter/jquery.tablesorter.js"></script>
     <script src="javascripts/tablesorter/tables.js"></script>
 	<!-- /template plugins -->
-
+	<script type="text/javascript">
+		$(function() {
+	 		var active = "<?= (string) $active ?>";
+	 		console.log(active);
+	 		$('.side-nav li a').each(function(key,item) {
+	 			if (item.text.indexOf(active) >= 0) {
+	 				// console.log(item);
+	 				$('.side-nav li.active').removeClass("active");
+	 				item.parentNode.classList.add("active");
+	 			}
+	 		})
+	 	});
+	</script>
 
 	</body>
 </html>

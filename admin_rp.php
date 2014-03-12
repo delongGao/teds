@@ -1,7 +1,6 @@
 <?php
 require_once "header.inc.php";
 require_once "dbconnect.php";
-require_once "footer.inc.php";
 
 //set up some SQL statements
 $sql["language"] = 'SELECT * from languages';
@@ -13,7 +12,9 @@ try {
 
 <div id="wrapper">
 
-     <?php include "nav_part.inc.php" ?>
+     <?php
+     	include "nav_part.inc.php"; 
+     ?>
 
       <div id="page-wrapper">
 
@@ -124,4 +125,10 @@ try {
 	<script src="javascripts/foundation.js"></script>
 	<script src="javascripts/app.js"></script>
 	<script src="javascripts/admin.js"></script>
+
+	<?php
+     	$active = "Process";
+     	include "footer.inc.php"; 
+     ?>
+
 
