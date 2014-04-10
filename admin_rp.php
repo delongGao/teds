@@ -88,7 +88,7 @@ try {
 
 					<ul>
 					<?
-						$sth = $dbq->query('CALL getParentCategories(1,@cid,@ctitle,@cdesc)');
+						$sth = $dbq->query('CALL getParentCategories(5,@cid,@ctitle,@cdesc)');
 						
 						while ($prow = $sth->fetch()){
 						printf('<li><b>%s</b>', $prow['categoryTitle']);

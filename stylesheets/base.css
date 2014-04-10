@@ -44,15 +44,37 @@ form label:first-child {margin-top:0;}
 
 
 /*admin form stuff*/
+.form-button {
+	width: 25% !important;
+}
+
 #addProject h2 {margin-top:30px;background:#eee;}
-#addProject input[type="text"] {min-width:250px;}
+#addProject input[type="text"] {width:100%;}
 #addProject input[type="checkbox"] {vertical-align:bottom;display:inline-block;margin-left:5px;}
 
+/* project form widgets */
+#projects input[type="text"],#projects textarea {
+	width: 30%;
+	margin: 10px auto;
+}
+#projects select {
+	margin: 5px auto;
+	width: 25%;
+}
 
 #project textarea {width:500px;height:100px;}
 #addProject .addArtifact,
 #addProject .addPersona,
-#addProject .addScenario {border:1px solid #ccc;padding:10px;margin:0 10px 10px 0;width:260px;display:inline-block;background:#eee;}
+#addProject .addScenario, .addUser {
+	position: relative;
+	border:1px solid #ccc;
+	padding:10px;
+	margin:0 10px 10px 0;
+	width:30%;
+	display:inline-block !important;
+	background:#eee;
+	text-align: center;
+}
 
 #addProject .addPersona {background:#def;}
 #addProject .addScenario {background:#ffc;}

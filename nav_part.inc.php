@@ -10,7 +10,7 @@
           <ul class="nav navbar-nav side-nav">
             <li><a href="admin.html"><i class="fa fa-dashboard"></i> Dashboard</a></li>
             <li class="active"><a href="admin_rp.php"><i class="fa fa-bar-chart-o"></i> Rating Process</a></li>
-            <li><a href="admin_project.php"><i class="fa fa-table"></i> Project</a></li>
+            <li><a href="admin_pjt_project.php"><i class="fa fa-table"></i> Project</a></li>
             <li><a href="admin_pjt_atft.php"><i class="fa fa-edit"></i> Artifact</a></li>
             <li><a href="admin_pjt_persona.php"><i class="fa fa-font"></i> Persona</a></li>
             <li><a href="admin_pjt_scenario.php"><i class="fa fa-desktop"></i> Scenario</a></li>

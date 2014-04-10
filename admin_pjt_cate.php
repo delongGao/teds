@@ -15,8 +15,28 @@
      	include "nav_part.inc.php"; 
      ?>
 
-	<divid="page-wrapper">
-		<h1>Project Category Information</h1>
+	<div id="page-wrapper">
+		<h1>Category Information</h1>
+		<table id="pjt_cate_tbl" class="table table-bordered table-hover table-striped tablesorter">
+			<thead>
+              	<tr>
+	                <th>Category Title</th>
+	               	<th>Category Description</th>
+	               	<th>Category Language</th>
+              	</tr>
+            </thead>
+			<tbody>
+
+				<?php
+					$pre_result = $dbq->prepare("select categoryTitle, categoryDescription, categoryLanguage from category");
+					$pre_result->execute();
+					while ($row = $pre_result->fetch(PDO::FETCH_ASSOC)) {
+						// print_r($row);
+						printf('<tr><td>%s</td><td>%s</td><td>%s</td></tr>', $row['categoryTitle'],$row['categoryDescription'] ? $row['categoryDescription'] : "No information provided", "placeholder");
+					}
+				?>
+			</tbody>
+		</table>
 	</div>
 </div>
 
@@ -30,11 +50,6 @@
 
 
 <!-- include js files -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-	<script src="javascripts/modernizr.foundation.js"></script>
-	<script src="javascripts/foundation.js"></script>
-	<script src="javascripts/app.js"></script>
-	<script src="javascripts/admin.js"></script>
 
 <?php
      	$active = "Category";
