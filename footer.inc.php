@@ -16,7 +16,11 @@
 	<script src="javascripts/admin.js"></script>
     <!-- js_objects -->
     <script src="javascripts/js_objects.js" type="text/javascript"></script>
-	<!-- /template plugins -->
+    <script src="javascripts/ajax_handler.js" type="text/javascript"></script>
+    <script src="javascripts/notice.js" type="text/javascript"></script>
+    <script src="javascripts/main.js" type="text/javascript"></script>
+    <script src="javascripts/form.js" type="text/javascript"></script>
+    <!-- /template plugins -->
 	<script type="text/javascript">
 		$(function() {
 	 		var active = "<?= (string) $active ?>";
@@ -30,7 +34,8 @@
 	 		})
 
 	 		// initiate js objects
-	 		Toggle.init();
+            Form.init();
+            Toggle.init();
 	 	});
 	</script>
 

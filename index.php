@@ -18,7 +18,7 @@ $dbq->setAttribute (PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 		
 		<h2>1. Select a Language</h2>		
-		<select name="selLanguage">	
+		<select name="selLanguage" class="notEmpty">
 		<?
 			//make languages select
 			foreach ($dbq->query($sql["language"]) as $row) {
@@ -28,7 +28,7 @@ $dbq->setAttribute (PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		</select>
 				
 		<h2>2. Select a Project</h2>
-		<select id="selProject" name="selProject">
+		<select id="selProject" name="selProject" class="notEmpty">
 		<?	
 			foreach($dbq->query('CALL getAllProjects(@ID,@projectTitle,@Description)') as $row) {
 				printf('<option value="%s">%s</option>', $row['ID'], $row['projectTitle']);
@@ -37,7 +37,7 @@ $dbq->setAttribute (PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		</select>
 		<br /><br />
 		<h2>3. Select an Artifact</h2>
-		<select id="selArtifact" name="selArtifact">
+		<select id="selArtifact" name="selArtifact" class="notEmpty">
 		<?	
 			foreach($dbq->query('CALL getAllArtifacts(@ID,@artifactTitle,@description,@url,@type)') as $row) {
 				printf('<option value="%s">%s</option>',$row['ID'], $row['title']);
@@ -45,7 +45,7 @@ $dbq->setAttribute (PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		?>
 		</select>
 
-		<p><input type="submit" value="Submit" /></p>
+		<p><input type="submit" value="Submit" class="btn btn-success form-control form-button" /></p>
 	</form>
 	</div>
 <?

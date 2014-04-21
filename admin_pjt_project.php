@@ -43,10 +43,10 @@
 					<h2>Add Project</h2>
 					<!-- <a class="addmore" href="#" id="addMoreScenarios">Add Another Scenario</a> -->
 					<div id="projects" class="parent_contain">
-						<label for="projectName">Project Name</label><input class="form-control" type="text" name="projectName" />
-						<label for="projectDesc">Project Description</label><textarea class="form-control" name="projectDesc"></textarea>
+						<label for="projectName">Project Name</label><input class="form-control notEmpty" type="text" name="projectName" />
+						<label for="projectDesc">Project Description</label><textarea class="form-control notEmpty" name="projectDesc"></textarea>
 						<label for="projectLang">Project Language</label>
-						<select name="projectLang" class="form-control">
+						<select name="projectLang" class="form-control notEmpty">
 							<?
 								//make languages select
 								foreach ($dbq->query($sql["language"]) as $row) {
@@ -55,8 +55,8 @@
 							?>
 						</select>
 					</div>
-					<input type="hidden" name="source" value="project">
-					<button class="btn btn-success form-control form-button">Submit</button>
+					<input type="hidden" name="source" value="project" class="notEmpty">
+					<input class="btn btn-success form-control form-button" type="submit">
 				</form>
 			</div>
 		</div>

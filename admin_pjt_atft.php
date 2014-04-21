@@ -50,9 +50,9 @@
 					<a class="addmore" href="#" id="addMoreArtifacts">Add Another Artifact</a>
 					<div id="artifacts">
 						<div class="addArtifact">
-							<label for="artifactTitle[]">Artifact Title</label><input class="input-text form-control" type="text" name="artifactTitle[]" />
-							<label for="artifactURL[]">Artifact URL</label><input class="input-text form-control" type="text" name="artifactURL[]" />
-							<select name="projectID" class="form-control">
+							<label for="artifactTitle[]">Artifact Title</label><input class="input-text form-control notEmpty" type="text" name="artifactTitle[]" />
+							<label for="artifactURL[]">Artifact URL</label><input class="input-text form-control notEmpty" type="text" name="artifactURL[]" />
+							<select name="projectID[]" class="form-control notEmpty">
 								<?
 									//make languages select
 									foreach ($dbq->query('select * from project') as $row) {
@@ -62,8 +62,8 @@
 							</select>	
 						</div>
 					</div>
-					<input type="hidden" name="source" value="atft">
-					<button class="btn btn-success form-control form-button">Submit</button>
+					<input type="hidden" name="source" value="atft" class="notEmpty">
+					<input class="btn btn-success form-control form-button" type="submit">
 				</form>
 			</div>
 		</div>

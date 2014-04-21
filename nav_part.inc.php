@@ -2,14 +2,14 @@
       <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-          <a class="navbar-brand" href="index.html">TEDS Site Rater Admin</a>
+          <a class="navbar-brand" href="admin.html">TEDS Site Rater Admin</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
           <ul class="nav navbar-nav side-nav">
             <li><a href="admin.html"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-            <li class="active"><a href="admin_rp.php"><i class="fa fa-bar-chart-o"></i> Rating Process</a></li>
+            <li class="active"><a href="admin_rp.php"><i class="fa fa-bar-chart-o"></i> New Rating</a></li>
             <li><a href="admin_pjt_project.php"><i class="fa fa-table"></i> Project</a></li>
             <li><a href="admin_pjt_atft.php"><i class="fa fa-edit"></i> Artifact</a></li>
             <li><a href="admin_pjt_persona.php"><i class="fa fa-font"></i> Persona</a></li>

@@ -51,12 +51,12 @@
 					<a class="addmore" href="#" id="addMoreScenarios">Add Another Scenario</a>
 					<div id="scenarios" class="parent_contain">
 						<div class="addScenario">
-							<label for="scenarioTitle[]">Scenario Title</label><input class="input-text" type="text" name="scenarioTitle[]" />
-							<label for="scenarioDesc[]">Scenario Description</label><input class="input-text" type="text" name="scenarioDesc[]" />			
+							<label for="scenarioTitle[]">Scenario Title</label><input class="input-text notEmpty" type="text" name="scenarioTitle[]" />
+							<label for="scenarioDesc[]">Scenario Description</label><input class="input-text notEmpty" type="text" name="scenarioDesc[]" />
 						</div>
 					</div>
-					<input type="hidden" name="source" value="scenario">
-					<button class="btn btn-success">Submit</button>
+					<input type="hidden" name="source" value="scenario" class="notEmpty">
+					<input class="btn btn-success" type="submit">
 				</form>
 			</div>
 		</div>

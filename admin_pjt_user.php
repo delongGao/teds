@@ -4,6 +4,7 @@
 
 	//set up some SQL statements
 	$sql["language"] = 'SELECT * from languages';
+    $sql['persona'] = 'select * from personae';
 
 	try {
 		$dbq = db_connect();
@@ -44,17 +45,17 @@
 			<div class="center-block"><button class="toggle btn btn-default">Add New User</button></div>
 			<div class="clearfix"></div>
 			<div class="toggle-content center-block" style="display:none;">
-				<form id="addProject" name="addProject" action="adminproc.php" method="post">
+				<form id="addProject" name="addProject" action="adminproc.php" method="post" role="form">
 					<h2>Add Project User(s)</h2>
-					<a class="addmore" href="#" id="addMoreUsers">Add Another User</a>
+<!--					<a class="addmore" href="#" id="addMoreUsers">Add Another User</a>-->
 					<div id="users">
 						<div class="addUser">
-							<label for="email[]">User Email</label><input class="input-text form-control" type="text" name="email[]" />
-							<label for="firstName[]">User Firstname</label><input class="input-text form-control" type="text" name="firstName[]" />
-							<label for="lastName[]">User Lastname</label><input class="input-text form-control" type="text" name="lastName[]" />		
-							<label for="passwordValue[]">User Password</label><input class="input-text form-control" type="text" name="passwordValue[]" />
-							<label for="languageID[]">User Preferred Language</label>
-							<select name="languageID[]" class="form-control">
+							<label for="email">User Email</label><input class="input-text form-control notEmpty" type="text" name="email" />
+							<label for="firstName">User Firstname</label><input class="input-text form-control notEmpty" type="text" name="firstName" />
+							<label for="lastName">User Lastname</label><input class="input-text form-control notEmpty" type="text" name="lastName" />
+							<label for="passwordValue">User Password</label><input class="input-text form-control notEmpty" type="text" name="passwordValue" />
+							<label for="languageID">User Preferred Language</label>
+							<select name="languageID" class="form-control notEmpty">
 								<?
 									//make languages select
 									foreach ($dbq->query('SELECT * FROM languages') as $row) {
@@ -62,15 +63,25 @@
 									}
 								?>
 							</select>	
-							<label for="AuthorityLevel[]">User Authority Type</label>
-							<select name="AuthorityLevel[]" class="form-control">
+							<label for="AuthorityLevel">User Authority Type</label>
+							<select name="AuthorityLevel" class="form-control notEmpty">
 								<option value=1>User</option>
 								<option value=2>Administrator</option>
-							</select>	
+							</select>
+
+                            <label for="userPersona[]">Choose Personas</label>
+                            <div class="checkbox">
+                                <?
+                                    // make checkbox for persona options
+                                    foreach ($dbq->query($sql['persona']) as $row) {
+                                        printf('<label><input type="checkbox" name="userPersona[]" value=' . $row['personaeID'] . '>' . $row['personaTitle'] . '</label><br/>');
+                                    }
+                                ?>
+                            </div>
 						</div>
 					</div>
-					<input type="hidden" name="source" value="user">
-					<button class="btn btn-success form-control form-button">Submit</button>
+					<input type="hidden" name="source" value="user" class="notEmpty">
+					<input class="btn btn-success form-control form-button" type="submit">
 				</form>
 			</div>
 		</div>

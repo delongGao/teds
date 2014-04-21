@@ -55,6 +55,16 @@ if($_POST){
 					// echo "last inserted scenario id: ". $scenarioID . '<br />';
 					array_push($scenarioIDs, $scenarioID);
 				}
+                //update scenarioCategory
+                $sql["categoryID"] = 'SELECT * from category where categoryID > 6';
+                foreach ($dbq->query($sql["categoryID"]) as $cID) {
+
+                    for($i = 0; $i < count($scenarioIDs); $i++) {
+                        $sql["sceCate"] = 'INSERT INTO scenarioCategory (scenarioID, categoryID) VALUES ('. $scenarioIDs[$i].', '. $cID['categoryID'].')';
+                        $dbq->query($sql["sceCate"]);
+                    }
+
+                }
 				break;
 
 			case 'atft':
@@ -63,7 +73,6 @@ if($_POST){
 				// print_r($_POST['artifactTitle']);
 				// echo "<html><br/></html>";
 				// print_r($_POST['artifactURL']);
-				$projectID = $_POST['projectID'];
 				$artifactTitle = $_POST['artifactTitle'];
 				$artifactURL = $_POST['artifactURL'];
 				// echo "<html><br/></html>";
@@ -92,19 +101,28 @@ if($_POST){
 					$artifactID = $dbq->query('SELECT @nid')->fetchColumn();
 					// echo "last inserted artifact id: ". $artifactID . '<br />';
 					array_push($artifactIDs, $artifactID);
+//                    echo $artifactID;
 				}
+
+//                print_r($artifactIDs);
 				
 				//update projectArtifact
 				$paids = array();
 				for($i = 0; $i < count($artifactIDs); $i++) {
 					$artifactID = $artifactIDs[$i];
+                    $projectID = $_POST['projectID'][$i];
+//                    echo($artifactID);
 					// echo 'add artifact id:' .$artifactID . ', to<br/>';
 					// echo 'project' . $projectID . '<br/>';
-					$stmt = $dbq->prepare("CALL addProjectArtifact(:pid,:aid,:isAnchor,@nid)");
-					$stmt->bindValue(':pid',$projectID, PDO::PARAM_INT);
-					$stmt->bindValue(':aid',$artifactID, PDO::PARAM_INT);
-					$stmt->bindValue(':isAnchor',null, PDO::PARAM_INT);
-					$stmt->execute();
+                    $the_query = "Insert Into projectArtifact (projectID, artifactID, isAnchor) VALUES(" . $projectID . ", " . $artifactID . ", " . "null);";
+//                    echo($the_query);
+					$stmt = $dbq->query($the_query);
+//                    echo($projectID);
+//					$stmt->bindValue(':pid',$projectID, PDO::PARAM_INT);
+//					$stmt->bindValue(':aid',$artifactID, PDO::PARAM_INT);
+//					$stmt->bindValue(':isAnchor',null, PDO::PARAM_INT);
+//                    echo($stmt);
+//					$stmt->execute();
 
 					$paid = $dbq->query('SELECT @nid')->fetchColumn();
 					array_push($paids, $paid);
@@ -172,58 +190,69 @@ if($_POST){
 				$passwordValue = $_POST['passwordValue'];
 				$languageID = $_POST['languageID'];
 				$AuthorityLevel = $_POST['AuthorityLevel'];
-				$userIDs = array();
-				for ($i = 0; $i < count($email); $i++) {
+                $userPersonas = $_POST['userPersona'];
+				$userID = null;
+//				for ($i = 0; $i < count($email); $i++) {
                     $the_query = "INSERT INTO `userProfile`(`email`, `firstName`, `lastName`, `preferredLanguage`, `passwordValue`, `AuthorityLevel`)
-                         VALUES ('" . (string)$email[$i] . "','" . (string)$firstName[$i] . "','" . (string)$lastName[$i] . "','" . (string)$languageID[$i] . "','" . (string)$passwordValue[$i] . "','" . (string)$AuthorityLevel[$i] . "')";
+                         VALUES ('" . (string)$email . "','" . (string)$firstName . "','" . (string)$lastName . "','" . (string)$languageID . "','" . (string)$passwordValue . "','" . (string)$AuthorityLevel . "')";
 //                    echo $the_query;
 
 					$stmt = $dbq->prepare(
                         $the_query
                     );
-					// $stmt->bindValue(':email',$email[$i], PDO::PARAM_STR);
-					// $stmt->bindValue(':firstName',$firstName[$i], PDO::PARAM_STR);
-					// $stmt->bindValue(':lastName',$lastName[$i], PDO::PARAM_INT);
-					// $stmt->bindValue(':passwordValue',$passwordValue[$i], PDO::PARAM_INT);
-					// $stmt->bindValue(':languageID',$languageID[$i], PDO::PARAM_INT);
-					// $stmt->bindValue(':AuthorityLevel',$AuthorityLevel[$i], PDO::PARAM_INT);
 					$stmt->execute();
 					//debug statements
-					$userID = $dbq->query('SELECT @nid')->fetchColumn();
-//					echo $email[$i];
-//					echo $firstName[$i];
-//					echo $lastName[$i];
-//					echo $passwordValue[$i];
-//					echo $languageID[$i];
-//					echo $AuthorityLevel[$i];
-//					echo "just inserted userid" . $userID;
-					array_push($userIDs, $userID);
-				}
-				// print_r($email);
-				// print_r($firstName);
-				// print_r($passwordValue);
-				// print_r($userIDs);
+					$userID = $dbq->query('SELECT LAST_INSERT_ID();')->fetchColumn();
+//					array_push($userIDs, $userID);
+//				}
 
-				// echo "last inserted project id: ". $projectID . '<br />';
-				// echo "title: ". $projectTitle . "<br/>";
-				// echo "description: " . $projectDescription . "<br />";
-				// echo "language id: " . $projectLanguageID . "<br />";
-				// $ids['userRating'] = $dbq->query('SELECT @nrid')->fetchColumn();
+                // update userPersonae
+//                echo("last added userid " . $userID);
+//                echo("");
+//                print_r($userPersonas);
+                for ($i=0;$i < count($userPersonas);$i++) {
+                    $the_query = "INSERT INTO `userPersonae`(`userID`, `personaeID`) VALUES (" . (string)$userID . "," . (string)$userPersonas[$i] . ")";
+                    $stmt = $dbq->prepare(
+                        $the_query
+                    );
+                    $stmt->execute();
+                }
+
 				break;
 
-			default:
-				
-				//update scenarioCategory
-				$sql["categoryID"] = 'SELECT * from category where categoryID > 6';
-				foreach ($dbq->query($sql["categoryID"]) as $cID) {
-					
-					for($i = 0; $i < count($scenarioIDs); $i++) {
-						$sql["sceCate"] = 'INSERT INTO scenarioCategory (scenarioID, categoryID) VALUES ('. $scenarioIDs[$i].', '. $cID['categoryID'].')';
-						$dbq->query($sql["sceCate"]);
-					}
-					
-				}
+            case "user_rating_progress":
+                $project = $_POST['project'];
+                $artifact = $_POST['artifact'];
+                $persona = $_POST['persona'];
+                $scenario = $_POST['scenario'];
+                $user = $_POST['user'];
 
+                $project_artifactID = $dbq->query('select * from projectArtifact pa
+                                                   join project p on pa.projectID = p.projectID
+                                                   join artifact a on pa.artifactID = a.artifactID
+                                                   where p.projectID = ' . $project . '
+                                                   and a.artifactID = ' . $artifact)->fetchColumn();
+//                $persona_scenarioID = $dbq->query('SELECT * FROM personaScenario ps
+//                                                   join personae p on ps.personaID = p.personaeID
+//                                                   join scenario s on ps.scenarioID = s.scenarioID
+//                                                   where p.personaeID = ' . $persona . '
+//                                                   and s.scenarioID = ' . $scenario)->fetchColumn();
+//                $persona_userID = $dbq->query('SELECT * FROM userPersonae up
+//                                               join personae p on up.personaeID = p.personaeID
+//                                               join userProfile u on up.userID = u.userID
+//                                               where p.personaeID = ' . $persona . '
+//                                               and u.userID = ' . $user)->fetchColumn();
+
+                $the_query = "INSERT INTO `userRatingProgress`(`userID`, `personaID`, `scenarioID`, `projectArtifactID`, `isComplete`, `completionDate`)
+                              VALUES (" . $user . "," . $persona . "," . $scenario . "," . $project_artifactID . ",null,null)";
+                $stmt = $dbq->prepare(
+                    $the_query
+                );
+                $stmt->execute();
+
+                $user_ratingID = $dbq->query('SELECT LAST_INSERT_ID();')->fetchColumn();
+
+			default:
 				//print_r($_POST['rate']);
 				break;
 		}
@@ -236,6 +265,11 @@ if($_POST){
 }
 
 // redirect based on source param
-$source_url = "admin_pjt_".(string)$source.".php";
+if ($source == "user_rating_progress") {
+    $source_url = "admin_rp.php";
+} else {
+    $source_url = "admin_pjt_".(string)$source.".php";
+}
+
 header("Location: $source_url");
 ?>

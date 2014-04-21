@@ -48,12 +48,12 @@
 					<a class="addmore" href="#" id="addMorePersonas">Add Another Persona</a>
 					<div id="personas">
 						<div class="addPersona">
-							<label for="personaTitle[]">Persona Title</label><input class="input-text form-control" type="text" name="personaTitle[]" />
-							<label for="personaDesc[]">Persona Description</label><input class="input-text form-control" type="text" name="personaDesc[]" />		
+							<label for="personaTitle[]">Persona Title</label><input class="input-text form-control notEmpty" type="text" name="personaTitle[]" />
+							<label for="personaDesc[]">Persona Description</label><input class="input-text form-control notEmpty" type="text" name="personaDesc[]" />
 						</div>
 					</div>
-					<input type="hidden" name="source" value="persona">
-					<button class="btn btn-success form-control form-button">Submit</button>
+					<input type="hidden" name="source" value="persona" class="notEmpty">
+					<input class="btn btn-success form-control form-button" type="submit">
 				</form>
 			</div>
 		</div>

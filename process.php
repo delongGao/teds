@@ -6,28 +6,28 @@ Setting up some default values so there are no nulls
 
 All variables will be stored in associate array in $ids
 */
-$ids['user'] = 5; //user id - get from session
+$ids['user'] = $_POST['userID']; //user id - get from session
 // $ids['persona'] = 1; //persona id, get from rater.php form submit
 // $ids['scenario'] = 1; //scenario id, get from rater.php form submit
-$ids['persona'] = 1; //persona id, get from rater.php form submit
-$ids['scenario'] = 1; //scenario id, get from rater.php form submit
+$ids['persona'] = $_POST['personaID']; //persona id, get from rater.php form submit
+$ids['scenario'] = $_POST['scenarioID']; //scenario id, get from rater.php form submit
 $ids['project'] = $_POST['actProject']; //project id, get from rater.php form submit
 $ids['artifact'] = $_POST['actArtifact']; //artifact id, get from rater.php form submit
 
-$ids['userRating'] = 0;
+$ids['userRating'] = $_POST['urpID'];
 $screenshots = array();
 
 //set persona id
-if($_POST['personae']){
-	$ids['persona'] = $_POST['personae'];
-	$_SESSION['personae'] = $_POST['personae'];
-}
+//if($_POST['personae']){
+//	$ids['persona'] = $_POST['personae'];
+//	$_SESSION['personae'] = $_POST['personae'];
+//}
 
 //set scenario id
-if($_POST['scenario']){
-	$ids['scenario'] = $_POST['scenario'];
-	$_SESSION['scenario'] = $_POST['scenario'];
-}
+//if($_POST['scenario']){
+//	$ids['scenario'] = $_POST['scenario'];
+//	$_SESSION['scenario'] = $_POST['scenario'];
+//}
 
 require_once "dbconnect.php";
 
@@ -85,14 +85,19 @@ try {
 	if($_POST['ratingNarrative']){ //if descriptive narrative exists, do things with it
 		$_SESSION['ratingNarrative'] = $_POST['ratingNarrative'];
 		
-		$stmt = $dbq->prepare("CALL addNarrative(:narrative,:urid,@nnid)");
-		$stmt->bindValue(':narrative',$_POST['ratingNarrative'], PDO::PARAM_STR);
-		$stmt->bindValue(':urid',$ids['userRating'], PDO::PARAM_INT);
-		$stmt->execute();
+//		$stmt = $dbq->prepare("CALL addNarrative(narrative,urid,@nnid)");
+//		$stmt->bindValue('narrative',$_POST['ratingNarrative'], PDO::PARAM_STR);
+//		$stmt->bindValue('urid',$ids['userRating'], PDO::PARAM_INT);
+//		$stmt->execute();
+
+        $stmt = $dbq->prepare("INSERT INTO ratingNarrative
+                            (userRatingID, userNarrative)
+                            VALUES
+                            (" . $ids['userRating'] . ", " . $_POST['ratingNarrative'] .")");
 		
 		//debug statements
 		echo $_POST['ratingNarrative'] . '<br />';
-		echo "last insert / update id: ".$dbq->query('SELECT @nnid')->fetchColumn() . '<br />';
+		echo "last insert / update id: ".$dbq->query('SELECT LAST_INSERT_ID();')->fetchColumn() . '<br />';
 	}
 
 	if($_FILES){

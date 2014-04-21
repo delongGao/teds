@@ -14,7 +14,6 @@ $(document).ready(function() {
 		console.log("hit")
 		console.log($(this).parents(".columns").children(":checkbox"));
 	});
-
 });
 
 function removeThis() {
