@@ -63,7 +63,7 @@ if(isset($_SESSION['user_email'])) {    // if there is no valid session
     </head>
     <body>
 	<!-- container -->
-	<div id="sitecontainer">
+	<div id="indexWrapper">
         <h2>TEDS Evaluation Admin</h2>
         <p>Authorized user only</p>
 
@@ -84,26 +84,8 @@ if(isset($_SESSION['user_email'])) {    // if there is no valid session
             <p><a href="https://ischool.uw.edu/" target="blank">Information School</a></p>
             <p>Contact us at <a href="mailto:gaodl@uw.edu">link</a> | <small>All rights reserved</small></p>
         </div>
-<?
-	//close connection
-//	$dbq = NULL;
-//} catch (PDOException $e) {
-//     print ("Could not connect to server.\n");
-//     print ("getMessage(): " . $e->getMessage () . "\n");
-//}
-?>
-
-
-<?
-//print "Session: " . session_id();
-//if (defined("CRYPT_BLOWFISH") && CRYPT_BLOWFISH) {
-//    echo "CRYPT_BLOWFISH is enabled!";
-//}
-//else {
-//    echo "CRYPT_BLOWFISH is not available";
-//}
-?>	
 	</div>
+    <div id="noticeInfo"></div>
 	<!-- sitecontainer -->
 
 	<!-- Included JS Files -->
@@ -111,5 +93,11 @@ if(isset($_SESSION['user_email'])) {    // if there is no valid session
 	<script src="javascripts/modernizr.foundation.js"></script>
 	<script src="javascripts/foundation.js"></script>
 	<script src="javascripts/app.js"></script>
+    <script src="javascripts/main.js"></script>
+    <script src="javascripts/notice.js"></script>
+    <?
+        require_once "notice.inc.php";
+    ?>
+
 </body>
 </html>

@@ -39,6 +39,12 @@
 			</tbody>
 		</table>
 	</div>
+
+    <?
+    // logout form
+    require_once "logout_form.inc.php";
+    ?>
+
 </div>
 
 <?

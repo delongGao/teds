@@ -3,7 +3,7 @@ Notice = (function() {
 
     return {
         init: function(msg, type) {
-            noticeContainer.removeClass().addClass(type);
+            noticeContainer.removeClass().addClass(type); // type should be notice_success or notice_warning
             noticeContainer.empty().append("<p>" + msg + "</p>");
             Notice.fade();
             noticeContainer.click(function() {

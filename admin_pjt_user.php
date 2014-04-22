@@ -31,7 +31,9 @@
 			<tbody>
 
 				<?php
-					$pre_result = $dbq->prepare("select firstName, lastName, email, preferredLanguage, AuthorityLevel from userProfile");
+					$pre_result = $dbq->prepare("select firstName, lastName, email, preferredLanguage, AuthorityLevel
+					                             from userProfile
+					                             where AuthorityLevel = 1");
 					$pre_result->execute();
 					while ($row = $pre_result->fetch(PDO::FETCH_ASSOC)) {
 						// print_r($row);
@@ -84,6 +86,12 @@
 		</div>
 
 	</div>
+
+    <?
+    // logout form
+    require_once "logout_form.inc.php";
+    ?>
+
 </div>
 
 <?

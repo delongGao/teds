@@ -41,5 +41,19 @@ $(function() {
             Notice.init("Cannot connect to server, please try again later!", "notice_warning");
         });
     })
+
+    // handle logout
+    $('#logout').click(function() {
+        var c = confirm("Please confirm: log out?");
+        if (c) {
+            $('#logout_form').submit();
+//            $.post( "adminproc.php", { source: "logout" } )
+//                .done(function() {location.reload();});
+//            console.log("log me out");
+        }
+    })
+
+    // handle authentication notification
+
 });
 

@@ -291,6 +291,16 @@ if($_POST){
                 }
                 break;
 
+            case "logout":
+                // log the user
+                if (session_status() == PHP_SESSION_NONE) {
+                    session_start();
+                }
+                // delete session
+                unset($_SESSION['user']);
+                session_destroy();
+                break;
+
 			default:
 				//print_r($_POST['rate']);
 				break;
@@ -321,7 +331,8 @@ if ($source == "user_rating_progress") {
     } else {
         $source_url = "index.php?notice=no_access";
     }
-
+} elseif($source == "logout") {
+    $source_url = "index.php?notice=logout";
 } else {
     $source_url = "admin_pjt_".(string)$source.".php";
 }

@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
     <!-- Page Specific CSS -->
     <link rel="stylesheet" href="http://cdn.oesmith.co.uk/morris-0.4.3.min.css">
+    <link rel="stylesheet" href="stylesheets/main.css">
   </head>
 
   <body>
@@ -57,16 +58,19 @@
           </ul>
 
           <ul class="nav navbar-nav navbar-right navbar-user">
-            <li class="dropdown user-dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="#"><i class="fa fa-user"></i> Profile</a></li>
-                <li><a href="#"><i class="fa fa-envelope"></i> Inbox <span class="badge">7</span></a></li>
-                <li><a href="#"><i class="fa fa-gear"></i> Settings</a></li>
-                <li class="divider"></li>
-                <li><a href="#"><i class="fa fa-power-off"></i> Log Out</a></li>
-              </ul>
-            </li>
+              <li>
+                  <a href="#" id="logout">Log out</a>
+              </li>
+<!--            <li class="dropdown user-dropdown">-->
+<!--              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>-->
+<!--              <ul class="dropdown-menu">-->
+<!--                <li><a href="#"><i class="fa fa-user"></i> Profile</a></li>-->
+<!--                <li><a href="#"><i class="fa fa-envelope"></i> Inbox <span class="badge">7</span></a></li>-->
+<!--                <li><a href="#"><i class="fa fa-gear"></i> Settings</a></li>-->
+<!--                <li class="divider"></li>-->
+<!--                <li><a href="#"><i class="fa fa-power-off"></i> Log Out</a></li>-->
+<!--              </ul>-->
+<!--            </li>-->
           </ul>
         </div><!-- /.navbar-collapse -->
       </nav>
@@ -344,9 +348,11 @@
             </div>
           </div>
         </div><!-- /.row -->
-
+        <?
+            require_once "logout_form.inc.php";
+        ?>
       </div><!-- /#page-wrapper -->
-
+      <div id="noticeInfo"></div>
     </div><!-- /#wrapper -->
 
   <!-- /template -->
@@ -366,6 +372,11 @@
     <script src="javascripts/morris/chart-data-morris.js"></script>
     <script src="javascripts/tablesorter/jquery.tablesorter.js"></script>
     <script src="javascripts/tablesorter/tables.js"></script>
+    <script src="javascripts/main.js"></script>
+    <script src="javascripts/notice.js"></script>
   <!-- /template plugins -->
+    <?
+        require_once "notice.inc.php";
+    ?>
 </body>
 </html>

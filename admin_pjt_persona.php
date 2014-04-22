@@ -60,6 +60,12 @@
 		</div>
 
 	</div>
+
+    <?
+    // logout form
+    require_once "logout_form.inc.php";
+    ?>
+
 </div>
 
 <?

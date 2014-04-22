@@ -6,7 +6,7 @@ div.error_container, div.info_container {
     border-radius: 5px;
 }
 .error_container {
-    border: 4px solid #e5576e;
+    border: 4px solid #ff6b4d;
 }
 .info_container {
     border: 4px solid #75c898;
@@ -33,8 +33,8 @@ div.error_container, div.info_container {
     text-align: center;
     position: fixed;
     bottom: 0px;
-    left: 230px;
-    z-index: 10;
+    left: 0px;
+    z-index: 100;
     width: 100%;
 }
 #noticeInfo p {
@@ -50,7 +50,7 @@ div.error_container, div.info_container {
     background-color: #75c898;
 }
 .notice_warning p {
-    background-color: #e5576e;
+    background-color: #ff6b4d;
 }
 
 .dependWrapper {
@@ -81,10 +81,10 @@ div.error_container, div.info_container {
     color: #71d9b3;
 }
 .pw_wrong {
-    color: #e5576e;
+    color: #ff6b4d;
 }
 
-#sitecontainer {
+#indexWrapper {
     width: 70%;
     margin: 30px auto;
     border: solid 5px #1a1a1a;
