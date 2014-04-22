@@ -1,4 +1,5 @@
 <?php
+    require_once "session_inc.php";
 	require_once "header.inc.php";
 	require_once "dbconnect.php";
 

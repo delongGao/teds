@@ -1,3 +1,16 @@
+<?
+// ============================== authentication ===============================
+//if (session_status() == PHP_SESSION_NONE) {
+//    session_start();
+//}
+//session_regenerate_id();
+//if(!isset($_SESSION['user_email'])) {    // if there is no valid session
+//    header("Location: index.php?notice=login_first");
+//}
+    require_once "session_inc.php";
+// ============================== authentication ===============================
+?>
+
 	<!-- Included JS Files -->
 	<!-- template plugins -->
 	<!-- JavaScript -->

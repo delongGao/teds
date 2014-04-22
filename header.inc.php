@@ -1,3 +1,18 @@
+<?
+// ============================== authentication ===============================
+
+//    if (session_status() == PHP_SESSION_NONE) {
+//        session_start();
+//    }
+//    session_regenerate_id();
+//    if(!isset($_SESSION['user_email'])) {    // if there is no valid session
+//        header("Location: index.php?notice=login_first");
+//    }
+    require_once "session_inc.php";
+
+// ============================== authentication ===============================
+?>
+
 <!DOCTYPE html>
 <!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->

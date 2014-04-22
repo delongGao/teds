@@ -1,4 +1,5 @@
 <?php
+    require_once "session_inc.php";
 	require_once "header.inc.php";
 	require_once "dbconnect.php";
 
@@ -53,7 +54,8 @@
 							<label for="email">User Email</label><input class="input-text form-control notEmpty" type="text" name="email" />
 							<label for="firstName">User Firstname</label><input class="input-text form-control notEmpty" type="text" name="firstName" />
 							<label for="lastName">User Lastname</label><input class="input-text form-control notEmpty" type="text" name="lastName" />
-							<label for="passwordValue">User Password</label><input class="input-text form-control notEmpty" type="text" name="passwordValue" />
+<!--							<label for="passwordValue">User Password</label><input class="input-text form-control notEmpty" id="password_field" type="password" name="passwordValue" />-->
+<!--                            <label for="passwordVerify">Confirm Password</label><input class="input-text form-control notEmpty" id="password_verify" type="password" name="passwordVery" /> <span id="pw_very_show"></span>-->
 							<label for="languageID">User Preferred Language</label>
 							<select name="languageID" class="form-control notEmpty">
 								<?
@@ -62,13 +64,8 @@
 										printf('<option value="' . $row['languageID'] . '">' . $row['languageTitle'] . '</option>');
 									}
 								?>
-							</select>	
-							<label for="AuthorityLevel">User Authority Type</label>
-							<select name="AuthorityLevel" class="form-control notEmpty">
-								<option value=1>User</option>
-								<option value=2>Administrator</option>
 							</select>
-
+							<input type="hidden" name="AuthorityLevel" class="form-control notEmpty" value="1">
                             <label for="userPersona[]">Choose Personas</label>
                             <div class="checkbox">
                                 <?
@@ -110,3 +107,10 @@
      	$active = "User";
      	include "footer.inc.php"; 
 ?>
+    <script>
+        $(function() {
+            $("#password_field").focus(function() {
+                Form.password_behavior();
+            });
+        });
+    </script>

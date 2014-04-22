@@ -1,11 +1,25 @@
 <?php
 // require_once "session_inc.php";
-require_once "dbconnect.php";
+// ============================== authentication ===============================
+//if (session_status() == PHP_SESSION_NONE) {
+//    session_start();
+//}
+//session_regenerate_id();
+//if(!isset($_SESSION['user_email'])) {    // if there is no valid session
+//    header("Location: index.php?notice=login_first");
+//}
+    require_once "session_inc.php";
+// ============================== authentication ===============================
+
+    require_once "dbconnect.php";
+
 if($_POST){
+    $source = $_POST['source']; // source param
+    $authenticated = false;
 	try {
 		$dbq = db_connect();
 		
-		$source = $_POST['source']; // source param
+
 		// echo "<html><br/></html>";
 		// print($projectTitle);
 		// echo "<html><br/></html>";
@@ -187,14 +201,16 @@ if($_POST){
 				$email = $_POST['email'];
 				$firstName = $_POST['firstName'];
 				$lastName = $_POST['lastName'];
-				$passwordValue = $_POST['passwordValue'];
+//				if ($_POST['passwordValue'] == $_POST['passwordVery']) {
+//                    $passwordHashed = password_hash($_POST['passwordValue'], PASSWORD_DEFAULT) ;
+//                } password not needed, admin user can only be created at backend
 				$languageID = $_POST['languageID'];
-				$AuthorityLevel = $_POST['AuthorityLevel'];
+				$AuthorityLevel = 1;
                 $userPersonas = $_POST['userPersona'];
 				$userID = null;
 //				for ($i = 0; $i < count($email); $i++) {
                     $the_query = "INSERT INTO `userProfile`(`email`, `firstName`, `lastName`, `preferredLanguage`, `passwordValue`, `AuthorityLevel`)
-                         VALUES ('" . (string)$email . "','" . (string)$firstName . "','" . (string)$lastName . "','" . (string)$languageID . "','" . (string)$passwordValue . "','" . (string)$AuthorityLevel . "')";
+                         VALUES ('" . (string)$email . "','" . (string)$firstName . "','" . (string)$lastName . "','" . (string)$languageID . "','placeholder','" . (string)$AuthorityLevel . "')";
 //                    echo $the_query;
 
 					$stmt = $dbq->prepare(
@@ -252,21 +268,60 @@ if($_POST){
 
                 $user_ratingID = $dbq->query('SELECT LAST_INSERT_ID();')->fetchColumn();
 
+                break;
+
+            case "index":
+
+                if (isset($_POST['user_email']) && isset($_POST['password'])) {
+                    $user_email = $_POST['user_email'];
+                    $password = $_POST['password'];
+                    if (!preg_match("/^\s*$/i", $user_email) && !preg_match("/^\s*$/i", $password)) {
+                        $auth_query = "select * from userProfile
+                                       where email = '" . (string)$user_email . "'
+                                        and AuthorityLevel = 2";
+                        $result = $dbq->query($auth_query)->fetchAll();
+//                        echo($auth_query);
+                        if ($result) {
+//                            print_r($result);
+                            if ($password == $result[0]['passwordValue']) {
+                                $authenticated = true;
+                            }
+                        }
+                    }
+                }
+                break;
+
 			default:
 				//print_r($_POST['rate']);
 				break;
 		}
-
 	}
 	catch(PDOException $e){
 	// Report errors
 		// printf ($e->getMessage());
 	}
 }
-
 // redirect based on source param
+//echo($authenticated);
+//echo($source);
+
 if ($source == "user_rating_progress") {
     $source_url = "admin_rp.php";
+} elseif ($source == "index") {
+    if ($authenticated) {
+        // authenticate the user
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        // auth okay, setup session
+        $_SESSION['user_email'] = $_POST['user_email'];
+        $source_url = "admin.php?notice=success";
+
+
+    } else {
+        $source_url = "index.php?notice=no_access";
+    }
+
 } else {
     $source_url = "admin_pjt_".(string)$source.".php";
 }

@@ -1,7 +1,17 @@
-div.error_container {
+div.error_container, div.info_container {
     text-align: center;
-    width: 100%;
+    margin: 10px auto;
+    width: 75%;
+    padding: 5px;
+    border-radius: 5px;
 }
+.error_container {
+    border: 4px solid #e5576e;
+}
+.info_container {
+    border: 4px solid #75c898;
+}
+
 
 .action_wrapper {
 	text-align: center;
@@ -65,4 +75,24 @@ div.error_container {
 #emailModal .rating_info_check, .email_check {
     font-weight: bold;
     margin: 10px 0;
+}
+
+.pw_correct {
+    color: #71d9b3;
+}
+.pw_wrong {
+    color: #e5576e;
+}
+
+#sitecontainer {
+    width: 70%;
+    margin: 30px auto;
+    border: solid 5px #1a1a1a;
+    padding: 10px;
+    border-radius: 10px;
+}
+#footWrapper {
+    text-align: right;
+    font-size: 0.7em;
+    margin-right: 10px;
 }

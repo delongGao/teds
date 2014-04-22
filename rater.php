@@ -1,4 +1,6 @@
-<?php require_once "session_inc.php";
+<?php
+require_once "header.inc.php";
+require_once "session_inc.php";
 
 $pid = null; //project id
 $aid = null; //artifact id
@@ -10,7 +12,6 @@ $aid = null; //artifact id
 //	$aid = $_GET['selArtifact'];
 //}
 
-require_once "header.inc.php";
 require_once "dbconnect.php";
 
 // selLanguage=5&selProject=26&selArtifact=60&selScenario=27&selPersona=20

@@ -5,8 +5,18 @@
  * Date: 4/13/14
  * Time: 1:47 PM
  */
-require_once "dbconnect.php";
-$root_url = "http://localhost:90";
+// ============================== authentication ===============================
+//if (session_status() == PHP_SESSION_NONE) {
+//    session_start();
+//}
+//session_regenerate_id();
+//if(!isset($_SESSION['user_email'])) {    // if there is no valid session
+//    header("Location: index.php?notice=login_first");
+//}
+    require_once "session_inc.php";
+// ============================== authentication ===============================
+    require_once "dbconnect.php";
+    $root_url = "http://localhost:90";
 
 if (isset($_GET['trigger']) && isset($_GET['type'])) {
     try {

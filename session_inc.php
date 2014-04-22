@@ -1,18 +1,19 @@
 <?php
-session_start();
+// ============================== authentication ===============================
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+    session_regenerate_id();
+}
+if(!isset($_SESSION['user_email'])) {    // if there is no valid session
+    header("Location: index.php?notice=login_first");
+}
+// ============================== authentication ===============================
+
+
 /*
 if (!isset($_SESSION['initiated'])) {
     session_regenerate_id();
     $_SESSION['initiated'] = true;	
 }
 */
-?>
-
-
-<?
-if (isset($_SESSION['rateform'])){
-	//print_r($_SESSION['rateform']);
-	//print $_SESSION['ratingNarrative'];
-	//printf("<p>".$_SESSION['rateform'][33]."</p>");
-}
 ?>

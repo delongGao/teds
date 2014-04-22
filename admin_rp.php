@@ -1,6 +1,7 @@
 <?php
-require_once "header.inc.php";
-require_once "dbconnect.php";
+    require_once "session_inc.php";
+    require_once "header.inc.php";
+    require_once "dbconnect.php";
 
 //set up some SQL statements
 $sql["project"] = 'SELECT * from project';

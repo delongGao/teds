@@ -1,18 +1,40 @@
-<?php
-require_once "header.inc.php";
-require_once "dbconnect.php";
-
-//set up some SQL statements
-$sql["language"] = 'SELECT * from languages';
-
-try {
-	$dbq = db_connect();
-	
+<?
+// ============================== authentication ===============================
+//    if (session_status() == PHP_SESSION_NONE) {
+//        session_start();
+//
+//    }
+//    if(!isset($_SESSION['user_email'])) {    // if there is no valid session
+//        header("Location: index.php?notice=login_first");
+//    }
+    require_once "session_inc.php";
+// ============================== authentication ===============================
 ?>
 
-	<!-- template -->
 
-	<div id="wrapper">
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Dashboard - SB Admin</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="stylesheets/bootstrap.css" rel="stylesheet">
+
+    <!-- Add custom CSS here -->
+    <link href="stylesheets/sb-admin.css" rel="stylesheet">
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+    <!-- Page Specific CSS -->
+    <link rel="stylesheet" href="http://cdn.oesmith.co.uk/morris-0.4.3.min.css">
+  </head>
+
+  <body>
+
+    <div id="wrapper">
 
       <!-- Sidebar -->
       <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -25,13 +47,13 @@ try {
         <div class="collapse navbar-collapse navbar-ex1-collapse">
           <ul class="nav navbar-nav side-nav">
             <li class="active"><a href="index.html"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-            <li><a href="admin_rp.php"><i class="fa fa-bar-chart-o"></i> Rating Process</a></li>
-            <li><a href="tables.html"><i class="fa fa-table"></i> Project</a></li>
-            <li><a href="forms.html"><i class="fa fa-edit"></i> Project Artifact</a></li>
-            <li><a href="typography.html"><i class="fa fa-font"></i> Project Persona</a></li>
-            <li><a href="bootstrap-elements.html"><i class="fa fa-desktop"></i> Project Scenario</a></li>
-            <li><a href="bootstrap-grid.html"><i class="fa fa-wrench"></i> Categories</a></li>
-            <li><a href="bootstrap-user.html"><i class="fa fa-user"></i> User</a></li>
+            <li><a href="admin_rp.php"><i class="fa fa-bar-chart-o"></i> New Rating</a></li>
+            <li><a href="admin_pjt_project.php"><i class="fa fa-table"></i> Project</a></li>
+            <li><a href="admin_pjt_atft.php"><i class="fa fa-edit"></i> Artifact</a></li>
+            <li><a href="admin_pjt_persona.php"><i class="fa fa-font"></i> Persona</a></li>
+            <li><a href="admin_pjt_scenario.php"><i class="fa fa-desktop"></i> Scenario</a></li>
+            <li><a href="admin_pjt_cate.php"><i class="fa fa-wrench"></i> Categories</a></li>
+            <li><a href="admin_pjt_user.php"><i class="fa fa-user"></i> User</a></li>
           </ul>
 
           <ul class="nav navbar-nav navbar-right navbar-user">
@@ -48,7 +70,6 @@ try {
           </ul>
         </div><!-- /.navbar-collapse -->
       </nav>
-
       <div id="page-wrapper">
 
         <div class="row">
@@ -328,25 +349,23 @@ try {
 
     </div><!-- /#wrapper -->
 
-	<!-- /template -->
+  <!-- /template -->
 
 
-	
-	
-	<!-- Included JS Files -->
-	<!-- template plugins -->
-	<!-- JavaScript -->
+  
+  
+  <!-- Included JS Files -->
+  <!-- template plugins -->
+  <!-- JavaScript -->
     <script src="javascripts/jquery-1.10.2.js"></script>
     <script src="javascripts/bootstrap.js"></script>
 
     <!-- Page Specific Plugins -->
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-    <script src="http://cdn.oesmith.co.uk/morris-0.4.3.min.js"></script>
+    <!-- // <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script> -->
+    <!-- // <script src="http://cdn.oesmith.co.uk/morris-0.4.3.min.js"></script> -->
     <script src="javascripts/morris/chart-data-morris.js"></script>
     <script src="javascripts/tablesorter/jquery.tablesorter.js"></script>
     <script src="javascripts/tablesorter/tables.js"></script>
-	<!-- /template plugins -->
-
-
+  <!-- /template plugins -->
 </body>
 </html>
