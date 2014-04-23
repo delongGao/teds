@@ -9,6 +9,10 @@
 //    }
     require_once "session_inc.php";
 // ============================== authentication ===============================
+
+    require_once "dbconnect.php";
+    try {
+    $dbq = db_connect();
 ?>
 
 
@@ -61,16 +65,6 @@
               <li>
                   <a href="#" id="logout">Log out</a>
               </li>
-<!--            <li class="dropdown user-dropdown">-->
-<!--              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>-->
-<!--              <ul class="dropdown-menu">-->
-<!--                <li><a href="#"><i class="fa fa-user"></i> Profile</a></li>-->
-<!--                <li><a href="#"><i class="fa fa-envelope"></i> Inbox <span class="badge">7</span></a></li>-->
-<!--                <li><a href="#"><i class="fa fa-gear"></i> Settings</a></li>-->
-<!--                <li class="divider"></li>-->
-<!--                <li><a href="#"><i class="fa fa-power-off"></i> Log Out</a></li>-->
-<!--              </ul>-->
-<!--            </li>-->
           </ul>
         </div><!-- /.navbar-collapse -->
       </nav>
@@ -78,276 +72,111 @@
 
         <div class="row">
           <div class="col-lg-12">
-            <h1>Dashboard <small>Statistics Overview</small></h1>
+            <h1>Dashboard <small>Completed Rating Progress</small></h1>
             <ol class="breadcrumb">
               <li class="active"><i class="fa fa-dashboard"></i> Dashboard</li>
             </ol>
-            <div class="alert alert-success alert-dismissable">
-              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-              Welcome to SB Admin by <a class="alert-link" href="http://startbootstrap.com">Start Bootstrap</a>! Feel free to use this template for your admin needs! We are using a few different plugins to handle the dynamic tables and charts, so make sure you check out the necessary documentation links provided.
-            </div>
           </div>
         </div><!-- /.row -->
 
-        <div class="row">
-          <div class="col-lg-3">
-            <div class="panel panel-info">
-              <div class="panel-heading">
-                <div class="row">
-                  <div class="col-xs-6">
-                    <i class="fa fa-comments fa-5x"></i>
-                  </div>
-                  <div class="col-xs-6 text-right">
-                    <p class="announcement-heading">456</p>
-                    <p class="announcement-text">New Mentions!</p>
-                  </div>
-                </div>
-              </div>
-              <a href="#">
-                <div class="panel-footer announcement-bottom">
-                  <div class="row">
-                    <div class="col-xs-6">
-                      View Mentions
-                    </div>
-                    <div class="col-xs-6 text-right">
-                      <i class="fa fa-arrow-circle-right"></i>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div class="col-lg-3">
-            <div class="panel panel-warning">
-              <div class="panel-heading">
-                <div class="row">
-                  <div class="col-xs-6">
-                    <i class="fa fa-check fa-5x"></i>
-                  </div>
-                  <div class="col-xs-6 text-right">
-                    <p class="announcement-heading">12</p>
-                    <p class="announcement-text">To-Do Items</p>
-                  </div>
-                </div>
-              </div>
-              <a href="#">
-                <div class="panel-footer announcement-bottom">
-                  <div class="row">
-                    <div class="col-xs-6">
-                      Complete Tasks
-                    </div>
-                    <div class="col-xs-6 text-right">
-                      <i class="fa fa-arrow-circle-right"></i>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div class="col-lg-3">
-            <div class="panel panel-danger">
-              <div class="panel-heading">
-                <div class="row">
-                  <div class="col-xs-6">
-                    <i class="fa fa-tasks fa-5x"></i>
-                  </div>
-                  <div class="col-xs-6 text-right">
-                    <p class="announcement-heading">18</p>
-                    <p class="announcement-text">Crawl Errors</p>
-                  </div>
-                </div>
-              </div>
-              <a href="#">
-                <div class="panel-footer announcement-bottom">
-                  <div class="row">
-                    <div class="col-xs-6">
-                      Fix Issues
-                    </div>
-                    <div class="col-xs-6 text-right">
-                      <i class="fa fa-arrow-circle-right"></i>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div class="col-lg-3">
-            <div class="panel panel-success">
-              <div class="panel-heading">
-                <div class="row">
-                  <div class="col-xs-6">
-                    <i class="fa fa-comments fa-5x"></i>
-                  </div>
-                  <div class="col-xs-6 text-right">
-                    <p class="announcement-heading">56</p>
-                    <p class="announcement-text">New Orders!</p>
-                  </div>
-                </div>
-              </div>
-              <a href="#">
-                <div class="panel-footer announcement-bottom">
-                  <div class="row">
-                    <div class="col-xs-6">
-                      Complete Orders
-                    </div>
-                    <div class="col-xs-6 text-right">
-                      <i class="fa fa-arrow-circle-right"></i>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </div>
-          </div>
-        </div><!-- /.row -->
+<?
+    // outer level query
+    $query = "select CONCAT(upro.firstName, ' ', upro.lastName) as userName,
+                upro.email as email,
+                urp.completionDate as completeDate,
+                pjt.projectTitle as pjtTitle,
+                a.artifactTitle as aTitle,
+                urp.userRatingProgressID as urpID
+
+                from userRatingProgress urp
+                join userProfile upro on urp.userID = upro.userID
+                join personae p on urp.personaID = p.personaeID
+                join scenario s on urp.scenarioID = s.scenarioID
+                join projectArtifact pa on urp.projectArtifactID = pa.projectArtifactID
+                join project pjt on pjt.projectID = pa.projectID
+                join artifact a on a.artifactID = pa.artifactID
+                where urp.isComplete = 'true'";
+
+        $first_level_result = $dbq->prepare($query);
+        $first_level_result->execute();
+        while ($row = $first_level_result->fetch(PDO::FETCH_ASSOC)) {
+?>
+
+<?
+    // inner level query
+        $inner_query = "select c.categoryTitle as cTitle,
+                        ur.ratingID as ratingScore
+                        from userRatingProgress urp
+                        join userRating ur on urp.userRatingProgressID = ur.userRatingProcessID
+                        join scenarioCategory sc on ur.scenarioCategoryID = sc.SC_ID
+                        join category c on c.categoryID = sc.categoryID
+                        where urp.userRatingProgressID = " . $row['urpID'];
+        $stmt = $dbq->prepare($inner_query);
+        $stmt->execute();
+        $second_level_result = $stmt->fetchAll();
+//        print_r($second_level_result);
+//        echo(count($second_level_result));
+        $half = count($second_level_result) / 2;
+        $sec_first_half = array_slice($second_level_result, 0, $half);
+        $sec_second_half = array_slice($second_level_result, $half + 1);
+//        print_r($sec_first_half);
+//        echo(count($sec_first_half));
+//        print_r($sec_second_half);
+//        echo(count($sec_second_half));
+
+?>
 
         <div class="row">
-          <div class="col-lg-12">
-            <div class="panel panel-primary">
-              <div class="panel-heading">
-                <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Traffic Statistics: October 1, 2013 - October 31, 2013</h3>
-              </div>
-              <div class="panel-body">
-                <div id="morris-chart-area"></div>
-              </div>
-            </div>
-          </div>
+            <div class="panel-group urp_record_group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse_<?= $row['urpID'] ?>">
+                                <?= $row['userName'] . " | " . $row['pjtTitle'] . " | " . $row['aTitle'] ?>
+                                <span class="left-small"><?= " -- Completed at: " . $row['completeDate'] ?></span>
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse_<?= $row['urpID'] ?>" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div class="half-table-wrapper">
+                                <table class="tbl_first_half table table-bordered table-hover table-striped tablesorter">
+                                    <tr>
+                                        <th>Category</th>
+                                        <th>User rating score</th>
+                                    </tr>
+                                    <?
+                                    for ($i = 0; $i < count($sec_first_half); $i++) {
+                                        print "<tr class='data_wrapper'><td>" . $sec_first_half[$i]['cTitle'] . "</td>";
+                                        print "<td>" . $sec_first_half[$i]['ratingScore'] . "</td></tr>";
+                                    }
+                                    ?>
+                                </table>
+                            </div>
+                            <div class="half-table-wrapper">
+                                <table class="tbl_second_half table table-bordered table-hover table-striped tablesorter">
+                                    <tr>
+                                        <th>Category</th>
+                                        <th>User rating score</th>
+                                    </tr>
+                                    <?
+                                    for ($i = 0; $i < count($sec_second_half); $i++) {
+                                        print "<tr class='data_wrapper'><td>" . $sec_second_half[$i]['cTitle'] . "</td>";
+                                        print "<td>" . $sec_second_half[$i]['ratingScore'] . "</td></tr>";
+                                    }
+                                    ?>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /accordion -->
         </div><!-- /.row -->
+<?
+        }
+?>
 
-        <div class="row">
-          <div class="col-lg-4">
-            <div class="panel panel-primary">
-              <div class="panel-heading">
-                <h3 class="panel-title"><i class="fa fa-long-arrow-right"></i> Traffic Sources: October 1, 2013 - October 31, 2013</h3>
-              </div>
-              <div class="panel-body">
-                <div id="morris-chart-donut"></div>
-                <div class="text-right">
-                  <a href="#">View Details <i class="fa fa-arrow-circle-right"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="panel panel-primary">
-              <div class="panel-heading">
-                <h3 class="panel-title"><i class="fa fa-clock-o"></i> Recent Activity</h3>
-              </div>
-              <div class="panel-body">
-                <div class="list-group">
-                  <a href="#" class="list-group-item">
-                    <span class="badge">just now</span>
-                    <i class="fa fa-calendar"></i> Calendar updated
-                  </a>
-                  <a href="#" class="list-group-item">
-                    <span class="badge">4 minutes ago</span>
-                    <i class="fa fa-comment"></i> Commented on a post
-                  </a>
-                  <a href="#" class="list-group-item">
-                    <span class="badge">23 minutes ago</span>
-                    <i class="fa fa-truck"></i> Order 392 shipped
-                  </a>
-                  <a href="#" class="list-group-item">
-                    <span class="badge">46 minutes ago</span>
-                    <i class="fa fa-money"></i> Invoice 653 has been paid
-                  </a>
-                  <a href="#" class="list-group-item">
-                    <span class="badge">1 hour ago</span>
-                    <i class="fa fa-user"></i> A new user has been added
-                  </a>
-                  <a href="#" class="list-group-item">
-                    <span class="badge">2 hours ago</span>
-                    <i class="fa fa-check"></i> Completed task: "pick up dry cleaning"
-                  </a>
-                  <a href="#" class="list-group-item">
-                    <span class="badge">yesterday</span>
-                    <i class="fa fa-globe"></i> Saved the world
-                  </a>
-                  <a href="#" class="list-group-item">
-                    <span class="badge">two days ago</span>
-                    <i class="fa fa-check"></i> Completed task: "fix error on sales page"
-                  </a>
-                </div>
-                <div class="text-right">
-                  <a href="#">View All Activity <i class="fa fa-arrow-circle-right"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="panel panel-primary">
-              <div class="panel-heading">
-                <h3 class="panel-title"><i class="fa fa-money"></i> Recent Transactions</h3>
-              </div>
-              <div class="panel-body">
-                <div class="table-responsive">
-                  <table class="table table-bordered table-hover table-striped tablesorter">
-                    <thead>
-                      <tr>
-                        <th>Order # <i class="fa fa-sort"></i></th>
-                        <th>Order Date <i class="fa fa-sort"></i></th>
-                        <th>Order Time <i class="fa fa-sort"></i></th>
-                        <th>Amount (USD) <i class="fa fa-sort"></i></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>3326</td>
-                        <td>10/21/2013</td>
-                        <td>3:29 PM</td>
-                        <td>$321.33</td>
-                      </tr>
-                      <tr>
-                        <td>3325</td>
-                        <td>10/21/2013</td>
-                        <td>3:20 PM</td>
-                        <td>$234.34</td>
-                      </tr>
-                      <tr>
-                        <td>3324</td>
-                        <td>10/21/2013</td>
-                        <td>3:03 PM</td>
-                        <td>$724.17</td>
-                      </tr>
-                      <tr>
-                        <td>3323</td>
-                        <td>10/21/2013</td>
-                        <td>3:00 PM</td>
-                        <td>$23.71</td>
-                      </tr>
-                      <tr>
-                        <td>3322</td>
-                        <td>10/21/2013</td>
-                        <td>2:49 PM</td>
-                        <td>$8345.23</td>
-                      </tr>
-                      <tr>
-                        <td>3321</td>
-                        <td>10/21/2013</td>
-                        <td>2:23 PM</td>
-                        <td>$245.12</td>
-                      </tr>
-                      <tr>
-                        <td>3320</td>
-                        <td>10/21/2013</td>
-                        <td>2:15 PM</td>
-                        <td>$5663.54</td>
-                      </tr>
-                      <tr>
-                        <td>3319</td>
-                        <td>10/21/2013</td>
-                        <td>2:13 PM</td>
-                        <td>$943.45</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="text-right">
-                  <a href="#">View All Transactions <i class="fa fa-arrow-circle-right"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div><!-- /.row -->
+
         <?
             require_once "logout_form.inc.php";
         ?>
@@ -380,3 +209,8 @@
     ?>
 </body>
 </html>
+<?
+    } catch (PDOException $e) {
+        print ("getMessage(): " . $e->getMessage () . "\n");
+    }
+?>

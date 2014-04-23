@@ -96,3 +96,18 @@ div.error_container, div.info_container {
     font-size: 0.7em;
     margin-right: 10px;
 }
+
+.urp_record_group {
+    width: 97%;
+    margin-left: 15px;
+}
+.left-small {
+    float: right;
+    font-size: 0.9em;
+    font-style: italic;
+}
+
+.half-table-wrapper {
+    float: left;
+    width: 49%;
+}
