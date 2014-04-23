@@ -111,3 +111,8 @@ div.error_container, div.info_container {
     float: left;
     width: 49%;
 }
+
+#sidenav_separate {
+    /*text-align: center;*/
+    border-bottom: 3px #999 solid;
+}

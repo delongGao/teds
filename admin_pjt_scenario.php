@@ -49,7 +49,7 @@
 			<div class="toggle-content center-block" style="display:none;">
 				<form id="addProject" name="addProject" action="adminproc.php" method="post">
 					<h2>Add Project Scenario(s)</h2>
-					<a class="addmore" href="#" id="addMoreScenarios">Add Another Scenario</a>
+<!--					<a class="addmore" href="#" id="addMoreScenarios">Add Another Scenario</a>-->
 					<div id="scenarios" class="parent_contain">
 						<div class="addScenario">
 							<label for="scenarioTitle[]">Scenario Title</label><input class="input-text notEmpty" type="text" name="scenarioTitle[]" />

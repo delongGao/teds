@@ -71,7 +71,9 @@ try {
                             $row['project'],$row['artifact'],$row['persona'],$row['scenario'], $row['userprofile'],
                             $row['complete'] ? "Completed at " . $row['completionDate'] :
                             "<button class='email_sender btn btn-primary btn-sm' data-toggle='modal' data-target='#emailModal' data-email='" . $row['email'] .
-                            "' data-urpid='" . $row['urpID'] . "'>Send link</button>"
+                            "' data-urpid='" . $row['urpID'] . "'>Send link</button>
+                            <button class='url_copy btn btn-info btn-sm' data-email='" . $row['email'] .
+                            "' data-urpid='" . $row['urpID'] . "'>Copy link</button>"
                     );
                 }
                 ?>
@@ -190,7 +192,6 @@ try {
             AjaxHandler.init("#projectID", "#projectArtifactReceiver", "project_artifact");
             AjaxHandler.init("#personaID", "#personaScenarioReceiver", "persona_scenario");
             AjaxHandler.init("#personaID", "#personaUserReceiver", "persona_user");
-
         });
     </script>
 

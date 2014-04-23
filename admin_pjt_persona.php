@@ -46,7 +46,7 @@
 			<div class="toggle-content center-block" style="display:none;">
 				<form id="addProject" name="addProject" action="adminproc.php" method="post">
 					<h2>Add Project Persona(s)</h2>
-					<a class="addmore" href="#" id="addMorePersonas">Add Another Persona</a>
+<!--					<a class="addmore" href="#" id="addMorePersonas">Add Another Persona</a>-->
 					<div id="personas">
 						<div class="addPersona">
 							<label for="personaTitle[]">Persona Title</label><input class="input-text form-control notEmpty" type="text" name="personaTitle[]" />

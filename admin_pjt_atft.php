@@ -48,7 +48,7 @@
 			<div class="toggle-content center-block" style="display:none;">
 				<form id="addProject" name="addProject" action="adminproc.php" method="post">
 					<h2>Add Project Artifact(s)</h2>
-					<a class="addmore" href="#" id="addMoreArtifacts">Add Another Artifact</a>
+<!--					<a class="addmore" href="#" id="addMoreArtifacts">Add Another Artifact</a>-->
 					<div id="artifacts">
 						<div class="addArtifact">
 							<label for="artifactTitle[]">Artifact Title</label><input class="input-text form-control notEmpty" type="text" name="artifactTitle[]" />

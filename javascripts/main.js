@@ -1,13 +1,15 @@
 $(function() {
+    var root_url = "http://localhost:90";
+
+
+    var urpID = $('.email_sender').attr("data-urpid");
+    var email = $('.email_sender').attr("data-email");
+    //        var rating_info = $(this).parent("td").siblings("td").text();
+    var url = root_url + "/teds/ajax_service.php?" + "email=" + email + "&urpID=" + urpID;
+
     // handle click ajax for sending email - ugly
 
     $('.email_sender').click(function() {
-        var urpID = $(this).attr("data-urpid");
-        var email = $(this).attr("data-email");
-//        var rating_info = $(this).parent("td").siblings("td").text();
-
-        var url = "/teds/ajax_service.php?" + "email=" + email + "&urpID=" + urpID;
-
 //        $('#emailModal div.rating_info_check')
 //            .html("")
 //            .append(rating_info);
@@ -53,7 +55,14 @@ $(function() {
         }
     })
 
-    // handle authentication notification
+    // handle clipboard
+    $('.url_copy').click(function() {
+        // handle clipboard
+        copyToClipboard(url);
+    })
 
 });
 
+function copyToClipboard(text) {
+    window.prompt("Copy to clipboard: Ctrl/Command+C, Enter", text);
+}

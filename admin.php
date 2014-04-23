@@ -45,20 +45,20 @@
       <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-          <a class="navbar-brand" href="index.html">TEDS Site Rater Admin</a>
+          <a class="navbar-brand" href="admin.php">TEDS Site Rater Admin</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
           <ul class="nav navbar-nav side-nav">
-            <li class="active"><a href="index.html"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-            <li><a href="admin_rp.php"><i class="fa fa-bar-chart-o"></i> New Rating</a></li>
-            <li><a href="admin_pjt_project.php"><i class="fa fa-table"></i> Project</a></li>
-            <li><a href="admin_pjt_atft.php"><i class="fa fa-edit"></i> Artifact</a></li>
-            <li><a href="admin_pjt_persona.php"><i class="fa fa-font"></i> Persona</a></li>
-            <li><a href="admin_pjt_scenario.php"><i class="fa fa-desktop"></i> Scenario</a></li>
-            <li><a href="admin_pjt_cate.php"><i class="fa fa-wrench"></i> Categories</a></li>
-            <li><a href="admin_pjt_user.php"><i class="fa fa-user"></i> User</a></li>
+            <li class="active"><a href="admin.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+            <li><a href="admin_rp.php" id="sidenav_separate"><i class="fa fa-bar-chart-o"></i> New Rating</a></li>
+            <li class="sub_level"><a href="admin_pjt_project.php"> 1. Project</a></li>
+            <li class="sub_level"><a href="admin_pjt_atft.php"> 2. Artifact</a></li>
+              <li class="sub_level"><a href="admin_pjt_scenario.php"> 3. Scenario</a></li>
+            <li class="sub_level"><a href="admin_pjt_persona.php"> 4. Persona</a></li>
+              <li class="sub_level"><a href="admin_pjt_user.php"> 5. User</a></li>
+              <li class="sub_level"><a href="admin_pjt_cate.php"> 6. Categories</a></li>
           </ul>
 
           <ul class="nav navbar-nav navbar-right navbar-user">
@@ -114,15 +114,9 @@
         $stmt = $dbq->prepare($inner_query);
         $stmt->execute();
         $second_level_result = $stmt->fetchAll();
-//        print_r($second_level_result);
-//        echo(count($second_level_result));
         $half = count($second_level_result) / 2;
         $sec_first_half = array_slice($second_level_result, 0, $half);
         $sec_second_half = array_slice($second_level_result, $half + 1);
-//        print_r($sec_first_half);
-//        echo(count($sec_first_half));
-//        print_r($sec_second_half);
-//        echo(count($sec_second_half));
 
 ?>
 
