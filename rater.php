@@ -107,8 +107,8 @@ if (isset($_GET['selLanguage']) && isset($_GET['selProject']) && isset($_GET['se
                 <div id="sitePane">
                     <div id="currRate" class="activeSite">
             <?
-                 printf("<h2>%s: %s</h2>", $row['title'], $row['URL']);
-                 print_r('<iframe width="100%" scrolling="auto" src="' . $row['URL'] . '"></iframe>');
+                 printf("<h2>%s: %s</h2>", $row['title'], urldecode($row['URL']));
+                 print_r('<iframe width="100%" scrolling="auto" src="' . urldecode($row['URL']) . '"></iframe>');
                 }
                 $sth->closeCursor();
             ?>

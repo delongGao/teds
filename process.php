@@ -130,16 +130,16 @@ try {
 //                $error_free = false;
 				$screenshots[$i] = NULL;
 			} else {
-				echo "Uploaded: " . $_FILES["scn"]["name"][$i] . "<br />";
+//				echo "Uploaded: " . $_FILES["scn"]["name"][$i] . "<br />";
 				$screenshots[$i] = $updir . $_FILES["scn"]["name"][$i];
 				
 				if (file_exists($updir . $_FILES["scn"]["name"][$i])){
-					echo $_FILES["scn"]["name"][$i] . " already exists.<br />";
+//					echo $_FILES["scn"]["name"][$i] . " already exists.<br />";
                     $error_free = false;
 				} else {
 					move_uploaded_file($_FILES["scn"]["tmp_name"][$i],
 					$updir . $_FILES["scn"]["name"][$i]);
-					echo "Stored in: " . $updir . $_FILES["scn"]["name"][$i] . "<br />";
+//					echo "Stored in: " . $updir . $_FILES["scn"]["name"][$i] . "<br />";
 				}	
 			}
 		}

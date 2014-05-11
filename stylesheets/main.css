@@ -116,3 +116,11 @@ div.error_container, div.info_container {
     /*text-align: center;*/
     border-bottom: 3px #999 solid;
 }
+
+
+.row-control {
+    position: absolute;
+    right: 50px;
+    font-size: 1.5em;
+    z-index: 100;
+}

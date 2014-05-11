@@ -16,7 +16,7 @@
     require_once "session_inc.php";
 // ============================== authentication ===============================
     require_once "dbconnect.php";
-    $root_url = "http://localhost:90";
+    $root_url = "http://depts.washington.edu/";
 
 if (isset($_GET['trigger']) && isset($_GET['type'])) {
     try {
@@ -79,6 +79,7 @@ if (isset($_GET['trigger']) && isset($_GET['type'])) {
 
         $email = $_GET['email'];
         $urpID = $_GET['urpID'];
+        $sendEmail = $_GET['sendEmail'];
 
         $first_query = "SELECT * FROM userRatingProgress urp
                              join userProfile up on urp.userID = up.userID
@@ -103,7 +104,7 @@ if (isset($_GET['trigger']) && isset($_GET['type'])) {
                 $scenario = $result['scenarioID'];
                 $userName = $result['firstName'] . " " . $result['lastName'];
 
-                $targetURL = "/teds/rater.php?selLanguage=" . $language . "&selProject=" . $project . "&selArtifact=" . $artifact . "&selScenario=" . $scenario . "&selPersona=" . $persona;
+                $targetURL = "/tedsrate/teds/rater.php?selLanguage=" . $language . "&selProject=" . $project . "&selArtifact=" . $artifact . "&selScenario=" . $scenario . "&selPersona=" . $persona;
 
                 $email_flag = false;
                 $email_message = "Invalid email! Please try again!";
@@ -152,8 +153,9 @@ if (isset($_GET['trigger']) && isset($_GET['type'])) {
                 }
 
                 //
+                $final_url = $root_url . $targetURL;
                 $final_result = [];
-                array_push($final_result,$email_flag, $email_message);
+                array_push($final_result,$email_flag, $email_message, $final_url);
                 print json_encode($final_result);
             }
         }

@@ -100,13 +100,17 @@ if($_POST){
 					// echo $artifactURL[$i] . '<br/>';
 					$stmt = $dbq->prepare("CALL addArtifact(:atitle,:aurl,:typeID,:Lan,@nid)");
 					$stmt->bindValue(':atitle',$artifactTitle[$i], PDO::PARAM_STR);
-					$url = urlencode($artifactURL[$i]);
 					//$url = mysql_real_escape_string($url);
-					if  ( $ret = parse_url($url) ) {
-		      			if ( !isset($ret["scheme"]) ) {
-		       				$url = "http://{$url}";
-		       			}
-					}
+//					if  ( $ret = parse_url($url) ) {
+//                    if ( !isset($ret["scheme"]) ) {
+                    $url = $artifactURL[$i];
+//                    if (strpos($url, 'http') == FALSE) {
+                    if (strpos($url, 'http') < 0) {
+                        $url = "http://{$url}";
+                    }
+//                    }
+//					}
+                    $url = urlencode($url);
 					$stmt->bindValue(':aurl',$url, PDO::PARAM_STR);
 					$stmt->bindValue(':typeID',$artifactTypeID, PDO::PARAM_INT);
 					$stmt->bindValue(':Lan',$artifactLanguage, PDO::PARAM_INT);

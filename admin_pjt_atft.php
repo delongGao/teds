@@ -31,11 +31,11 @@
 			<tbody>
 
 				<?php
-					$pre_result = $dbq->prepare("select artifactTitle, artifactURL, artifactDescription from artifact");
+					$pre_result = $dbq->prepare("select artifactTitle, artifactURL, artifactDescription, artifactID from artifact");
 					$pre_result->execute();
 					while ($row = $pre_result->fetch(PDO::FETCH_ASSOC)) {
 						// print_r($row);
-						printf('<tr><td>%s</td><td><a href="%s" target="blank">%s</a></td><td>%s</td></tr>', $row['artifactTitle'],$row['artifactURL'],$row['artifactURL'],$row['artifactDescription'] ? $row['artifactDescription'] : "No information provided");
+						printf('<tr id="%s"><td>%s</td><td><a href="%s" target="blank">%s</a></td><td>%s</td></tr>',$row['artifactID'] , $row['artifactTitle'],urldecode($row['artifactURL']),urldecode($row['artifactURL']),$row['artifactDescription'] ? $row['artifactDescription'] : "No information provided");
 					}
 				?>
 			</tbody>
