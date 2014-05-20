@@ -1,6 +1,6 @@
 <?php
-require_once "header.inc.php";
-require_once "session_inc.php";
+require_once "header.no_session.inc.php";
+//require_once "session_inc.php";
 
 $pid = null; //project id
 $aid = null; //artifact id
@@ -42,6 +42,7 @@ if (isset($_GET['selLanguage']) && isset($_GET['selProject']) && isset($_GET['se
         $lanID = $_GET['selLanguage'];
         $personaID = $_GET['selPersona'];
         $scenarioID = $_GET['selScenario'];
+        $urpID = $_GET['urpId'];
 
         $authenticate_query =  "SELECT * FROM userRatingProgress urp
                                 join projectArtifact pa on urp.projectArtifactID = pa.projectArtifactID
@@ -50,7 +51,8 @@ if (isset($_GET['selLanguage']) && isset($_GET['selProject']) && isset($_GET['se
                                 " and pa.artifactID = " . $aid .
                                 " and upro.preferredLanguage = " . $lanID .
                                 " and urp.personaID = " . $personaID .
-                                " and urp.scenarioID = " . $scenarioID;
+                                " and urp.scenarioID = " . $scenarioID .
+                                " and urp.`userRatingProgressID` = " . $urpID;
 
 //        echo($authenticate_query);
 
@@ -107,6 +109,7 @@ if (isset($_GET['selLanguage']) && isset($_GET['selProject']) && isset($_GET['se
                 <div id="sitePane">
                     <div id="currRate" class="activeSite">
             <?
+
                  printf("<h2>%s: %s</h2>", $row['title'], urldecode($row['URL']));
                  print_r('<iframe width="100%" scrolling="auto" src="' . urldecode($row['URL']) . '"></iframe>');
                 }

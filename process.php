@@ -1,6 +1,6 @@
 <?php
-require_once "session_inc.php";
-require_once "header.inc.php";
+//require_once "session_inc.php";
+require_once "header.no_session.inc.php";
 
 /*
 Setting up some default values so there are no nulls

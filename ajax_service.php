@@ -104,7 +104,7 @@ if (isset($_GET['trigger']) && isset($_GET['type'])) {
                 $scenario = $result['scenarioID'];
                 $userName = $result['firstName'] . " " . $result['lastName'];
 
-                $targetURL = "/tedsrate/teds/rater.php?selLanguage=" . $language . "&selProject=" . $project . "&selArtifact=" . $artifact . "&selScenario=" . $scenario . "&selPersona=" . $persona;
+                $targetURL = "/tedsrate/teds/rater.php?selLanguage=" . $language . "&selProject=" . $project . "&selArtifact=" . $artifact . "&selScenario=" . $scenario . "&selPersona=" . $persona . "&urpId=" . $urpID;
 
                 $email_flag = false;
                 $email_message = "Invalid email! Please try again!";

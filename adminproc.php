@@ -105,7 +105,7 @@ if($_POST){
 //                    if ( !isset($ret["scheme"]) ) {
                     $url = $artifactURL[$i];
 //                    if (strpos($url, 'http') == FALSE) {
-                    if (strpos($url, 'http') < 0) {
+                    if (!preg_match('/^http\S+/i',$url)) {
                         $url = "http://{$url}";
                     }
 //                    }
